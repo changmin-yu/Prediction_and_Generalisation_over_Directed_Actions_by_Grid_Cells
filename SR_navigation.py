@@ -1,3 +1,9 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+'''
+Author: Changmin Yu
+'''
+
 import numpy as np
 from fourier_utils import fourierMat
 from predictive_reconstruction import constructTransmat

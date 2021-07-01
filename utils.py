@@ -1,3 +1,9 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+'''
+Author: Changmin Yu
+'''
+
 import numpy as np
 
 def get_neighbours(i, j, H, W, periodic_boundary=False):
