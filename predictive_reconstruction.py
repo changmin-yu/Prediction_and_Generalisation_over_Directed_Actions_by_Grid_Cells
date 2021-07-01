@@ -78,12 +78,3 @@ def approximateDistanceSR(H, W, target_state=None, var=None, plot=False):
         ax.plot_trisurf(coords_x, coords_y, -dist, linewidth=0.2, antialiased=True)
         plt.show()
     return dist
-
-if __name__=='__main__':
-    import matplotlib.pyplot as plt
-    P = constructTransmat(40, 60, offset=np.array([20, 0]))
-    predictions = predictPlaceField(40, 60, P, init_pos=np.array([5, 10]), \
-        trans_offset=np.array([0, 5]), timestep=np.array([1, 2, 3, 4, 5]))
-    fig, ax = plt.subplots(1, 5)
-    for i in range(5):
-        ax[i].imshow(predictions[i])

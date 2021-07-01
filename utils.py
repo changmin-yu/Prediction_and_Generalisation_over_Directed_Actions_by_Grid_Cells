@@ -42,12 +42,6 @@ def constructOneStepTransmat2D(H, W, offset=None):
     T = np.zeros((H*W, H*W))
     if offset is None:
         offset = np.array([0., 0.])
-    # if not periodic_boundary:
-    #     inds = np.meshgrid(np.arange(W), np.arange(H))
-    #     offset_inds = inds + offset
-    #     valid_inds = np.where(offset_inds[:, 0] < H) * np.where(offset_inds[:, 0] >=0) \
-    #         * np.where(offset_inds[:, 1] < W) * np.where(offset_inds[:, 1] >= 0)
-    #     T[valid_inds]
     for i in range(H):
         for j in range(W):
             T[i*W+j, np.mod(i+offset[0], H)*W+np.mod(j+offset[1], W)] = 1

@@ -244,28 +244,3 @@ def straight_run_theta(width, length, start, end, n_step, directional, theta_mod
                 gc_spike[n_spikes, 3] = angle
                 gc_spike[n_spikes, 4] = k
     return gc_spike, n_spikes, bc_phase_record, pref_dirs
-
-if __name__=='__main__':
-    mpl_data = RGBToPyCmap(turbo_colormap_data)
-    plt.register_cmap(name='turbo', data=mpl_data, lut=turbo_colormap_data.shape[0])
-
-    mpl_data_r = RGBToPyCmap(turbo_colormap_data[::-1,:])
-    plt.register_cmap(name='turbo_r', data=mpl_data_r, lut=turbo_colormap_data.shape[0])
-
-    square_path = loadmat('square_path.mat')
-    l = np.array([[4, 1], [1, 4], [3, -3], [-4, -1], [-1, -4], [-3, 3]])
-    l = np.mod(l+50, 50)
-    gc_spike, n_spikes, pos, im, pref_dirs = bandsPhaseFromFourier(50, 50, square_path['square_path']/10, 96, 12.5, 1, 0, l, 0.2, 2.95, 0)
-
-    plt.figure()
-    plt.ylim(0, 50)
-    cmap = plt.cm.viridis
-    for i in range(-50, 50):
-        gc_spike_1, n_spikes_1, rec, pref_dirs = straight_run_theta(50, 50, np.array([1, i]), np.array([49, i+16]), 300, 1, 0, l, 0.2, 2.95)
-        plt.plot([1, 49], [i, i+16], '--', alpha=0.4, color='black')
-        if n_spikes_1 == 0:
-            continue
-        norm = matplotlib.colors.Normalize(vmin=np.min(gc_spike_1[:n_spikes_1, 2]), vmax=np.max(gc_spike_1[:n_spikes_1, 2]))
-        spike_color = gc_spike_1[:n_spikes_1, 2]
-        plt.scatter(gc_spike_1[1:n_spikes_1, 0], gc_spike_1[1:n_spikes_1, 1], c=cmap(norm(gc_spike_1[1:n_spikes_1, 2]), alpha=1))
-
